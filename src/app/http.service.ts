@@ -15,6 +15,7 @@ export class HttpService{
    * Запрос на получение списка продуктов.
    * @return {Object} person
    */
+  // tslint:disable-next-line:typedef
   getData() {
     return this.http.get(this.url);
   }
