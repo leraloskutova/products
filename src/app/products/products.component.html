@@ -1,21 +1,20 @@
 <div class="products">
   <ul class="product">
-    <li class="item" *ngFor="let product of products" (click)="onSelect(product)">
+    <li class="item" *ngFor="let product of products">
       <div class="product-card">
         <div class="product-image">
-          <a href="#" target="_blank">
-            <img class="item-image" src="{{product?.image}}"
+          <a routerLink="/products/{{product.id}}" target="_blank">
+            <img class="item-image" src="{{product.image}}"
                  alt="">
           </a>
         </div>
         <div class="product-info">
-          <a href="#" target="_blank">
-            <div class="item-title">{{product?.title}}</div>
+          <a routerLink="/products/{{product.id}}" target="_blank">
+            <div class="item-title">{{product.title}}</div>
           </a>
-          <div class="item-price">{{product?.price}} $</div>
+          <div class="item-price">{{product.price}} $</div>
         </div>
       </div>
     </li>
   </ul>
 </div>
-<app-product-detail [product]="selectedProduct"></app-product-detail>

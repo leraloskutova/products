@@ -1,15 +1,39 @@
-<div *ngIf="product">
-  <h2>Details</h2>
-  <h3>{{product.title}}</h3>
-  <div>
-    {{product.category}}
+<nav class="menu">
+  <a routerLink="/products">Products</a>
+  <span> > </span>
+  <a href="#">{{product.category}}</a>
+</nav>
+<div class="product-main" *ngIf="product">
+  <div class="product-image">
+    <div class="image-viewer">
+      <div id="samples">
+        <img class="magnifier-image"
+             id="zoom"
+             alt=""
+             width="300px"
+             onmousemove="zoomIn(event)"
+             onmouseout="zoomOut()"
+             src="{{product.image}}">
+      </div>
+      <div>
+        <div id="preview"
+             style="background-image: url({{product.image}})"
+             onmousemove="zoomIn(event)"></div>
+      </div>
+    </div>
   </div>
-  <img src="{{product.image}}"
-       alt="">
-  <div>
-    {{product.description}}
-  </div>
-  <div>
-    {{product.price}}
+
+  <div class="product-info">
+    <div class="product-title">
+      <h3>{{product.title}}</h3>
+    </div>
+    <div class="line"></div>
+    <div class="product-price">
+      {{product.price}} $
+    </div>
+    <div class="line"></div>
+    <div class="product-desc">
+      {{product.description}}
+    </div>
   </div>
 </div>

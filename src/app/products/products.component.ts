@@ -13,19 +13,18 @@ import {Product} from '../product';
  */
 export class ProductsComponent implements OnInit {
   products: Product[] = [];
-  selectedProduct: Product = new Product();
-  onSelect(product: Product): void {
-    this.selectedProduct = product;
-  }
   /**
    * Конструктор класса AppComponent.
    */
   constructor(private httpService: HttpService){}
+  ngOnInit(): void {
+    this.getProducts();
+  }
   /**
    * Получение списка продуктов.
    */
-  ngOnInit(): void{
-    this.httpService.getData()
+  getProducts(): void {
+    this.httpService.getProducts()
       .subscribe(products => this.products = products);
   }
 }
