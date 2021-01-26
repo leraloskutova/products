@@ -9,12 +9,22 @@
           </a>
         </div>
         <div class="product-info">
-          <a routerLink="/products/{{product.id}}" target="_blank">
-            <div class="item-title">{{product.title}}</div>
-          </a>
+          <div class="item-info">
+            <a routerLink="/products/{{product.id}}" target="_blank">
+              <div class="item-title">{{product.title}}</div>
+            </a>
+            <div class="item-desc">{{product.description}}</div>
+          </div>
           <div class="item-price">{{product.price}} $</div>
         </div>
       </div>
     </li>
   </ul>
 </div>
+<ngb-pagination class="d-flex justify-content-center"
+                [collectionSize]="collectionSize"
+                [(page)]="page"
+                (pageChange)="onPageChanged($event)"
+                [pageSize]="itemsPerPage"
+                [boundaryLinks]="true">
+</ngb-pagination>

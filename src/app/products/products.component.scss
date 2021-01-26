@@ -49,17 +49,30 @@
           width: 70%;
           vertical-align: top;
 
-          a {
-            color: #333;
-          }
-          a:hover {
-            color: red;
-          }
-
-          .item-title {
+          .item-info {
+            display: inline-block;
             max-width: 400px;
             margin: 10px;
-            cursor: pointer;
+
+            a {
+              color: #333;
+            }
+            a:hover {
+              color: red;
+            }
+
+            .item-desc {
+              text-align: justify;
+              font-size: 12px;
+              height: 35px;
+              overflow: hidden;
+              color: #afafaf;
+            }
+
+            .item-title {
+              margin-bottom: 10px;
+              cursor: pointer;
+            }
           }
 
           .item-price {

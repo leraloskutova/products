@@ -1,7 +1,8 @@
 import {Injectable} from '@angular/core';
 import {Observable} from 'rxjs';
 import {HttpClient} from '@angular/common/http';
-import {Product} from './product';
+import {Page} from './page';
+import {map} from 'rxjs/operators';
 
 @Injectable({ providedIn: 'root' })
 /**
@@ -17,11 +18,19 @@ export class HttpService{
    * Запрос на получение списка продуктов.
    * @return {Object} person
    */
-  getProducts(): Observable<Product[]> {
-    // @ts-ignore
-    return this.http.get(this.url);
+  getProducts(page: number, itemsPerPage: number): Observable<Page> {
+    let products = this.http.get<any[]>(this.url);
+    return this.getPageItems(products, page, itemsPerPage);
   }
-  getProduct(id: number): Observable<Product> {
-    return this.http.get(`https://fakestoreapi.com/products/${id}`);
+  private getPageItems(products: Observable<Array<any>>, page: number, itemsPerPage: number): Observable<Page> {
+    return products.pipe(
+      map(u => {
+        let startIndex = itemsPerPage * (page - 1);
+        return new Page(u.length, u.slice(startIndex, startIndex + itemsPerPage));
+      })
+    );
+  }
+  getProduct(id: number): Observable<Array<any>> {
+    return this.http.get<any[]>(`https://fakestoreapi.com/products/${id}`);
   }
 }
