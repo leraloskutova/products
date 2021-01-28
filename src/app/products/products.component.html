@@ -1,3 +1,4 @@
+<h1 class="title">{{title}}</h1>
 <div class="products">
   <ul class="product">
     <li class="item" *ngFor="let product of products">
@@ -15,7 +16,7 @@
             </a>
             <div class="item-desc">{{product.description}}</div>
           </div>
-          <div class="item-price">{{product.price}} $</div>
+          <div class="item-price">{{product.price | currency}}</div>
         </div>
       </div>
     </li>

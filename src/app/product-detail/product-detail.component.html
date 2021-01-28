@@ -1,5 +1,5 @@
 <nav class="menu">
-  <a routerLink="/products">Products</a>
+  <a [routerLink]="['/']">Products</a>
   <span> > </span>
   <a href="#">{{product.category}}</a>
 </nav>
@@ -29,7 +29,10 @@
     </div>
     <div class="line"></div>
     <div class="product-price">
-      {{product.price}} $
+      <span>{{product.price | currency}}</span>
+      <button type="button"
+              class="btn btn-outline-primary"
+              (click)="addToCart(product)">Buy</button>
     </div>
     <div class="line"></div>
     <div class="product-desc">

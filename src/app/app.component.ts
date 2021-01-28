@@ -1,4 +1,4 @@
-import {Component} from '@angular/core';
+import { Component } from '@angular/core';
 
 @Component({
   selector: 'app-root',
@@ -8,6 +8,4 @@ import {Component} from '@angular/core';
 /**
  * Класс компоненты приложения.
  */
-export class AppComponent {
-  title = 'Products';
-}
+export class AppComponent {}

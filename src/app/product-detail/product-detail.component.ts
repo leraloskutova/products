@@ -1,8 +1,9 @@
-import { Component, OnInit} from '@angular/core';
+import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
 
 import { Product } from '../product';
 import { HttpService } from '../http.service';
+import { CartService } from '../cart.service';
 
 @Component({
   selector: 'app-product-detail',
@@ -11,9 +12,11 @@ import { HttpService } from '../http.service';
 })
 export class ProductDetailComponent implements OnInit {
   product: Product = new Product();
+  // product: any;
   constructor(
     private route: ActivatedRoute,
-    private httpService: HttpService
+    private httpService: HttpService,
+    private cartService: CartService
   ) {}
 
   ngOnInit(): void {
@@ -25,5 +28,9 @@ export class ProductDetailComponent implements OnInit {
     const id = +this.route.snapshot.paramMap.get('id');
     this.httpService.getProduct(id)
       .subscribe(product => this.product = product);
+  }
+  addToCart(product) {
+    window.alert('Your product has been added to the cart!');
+    this.cartService.addToCart(product);
   }
 }

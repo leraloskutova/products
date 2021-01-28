@@ -1,5 +1,8 @@
+$top_bar_color: #0075b0;
 .product-main {
   background-color: #FFF;
+  box-shadow: 0 0 5px rgba(102, 102, 102, 0.5);
+  margin: 20px 0;
   border-radius: 15px;
   border: 1px solid #e8e8e8;
   padding: 15px 25px;
@@ -54,6 +57,17 @@
       padding: 15px 0;
     }
 
+    .btn-outline-primary {
+      color: $top_bar_color;
+      border-color: $top_bar_color;
+      margin-left: 50px;
+      padding: 5px 25px;
+    }
+
+    .btn-outline-primary:hover {
+      background-color: $top_bar_color;
+      color: white;
+    }
     .product-desc {
       font-size: 14px;
       padding: 15px 0;

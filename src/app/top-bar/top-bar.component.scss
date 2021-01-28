@@ -1,0 +1,27 @@
+$top_bar_color: #0075b0;
+a {
+  text-decoration: none;
+}
+button {
+  display: inline-flex;
+  align-items: center;
+  padding: 8px 16px;
+  border-radius: 2px;
+  font-size: 14px;
+  background-color: $top_bar_color;
+  border: none;
+}
+
+button:hover {
+  background-color: white;
+  color: $top_bar_color;
+}
+
+button:disabled {
+  opacity: 0.5;
+  cursor: auto;
+}
+
+.cart {
+  color: white;
+}

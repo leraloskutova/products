@@ -1,6 +1,6 @@
-import {Component, OnInit } from '@angular/core';
-import {HttpService} from '../http.service';
-import {Product} from '../product';
+import { Component, OnInit } from '@angular/core';
+import { HttpService } from '../http.service';
+import { Product } from '../product';
 
 @Component({
   selector: 'app-products',
@@ -12,6 +12,7 @@ import {Product} from '../product';
  * Класс компоненты приложения.
  */
 export class ProductsComponent implements OnInit {
+  title = 'Products';
   products: Product[] = [];
   public page: number;
   // @ts-ignore
@@ -26,7 +27,7 @@ export class ProductsComponent implements OnInit {
   }
   ngOnInit(): void {
   }
-  onPageChanged() {
+  onPageChanged(): void {
     this.getProducts();
   }
   /**

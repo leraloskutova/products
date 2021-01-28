@@ -1,0 +1,18 @@
+.title {
+  text-align: center;
+  margin: 15px 0;
+}
+
+.cart-item {
+  width: 100%;
+  min-width: 400px;
+  max-width: 600px;
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+  padding: 16px 32px;
+  border-radius: 2px;
+  background-color: #EEEEEE;
+  margin: auto;
+  margin-bottom: 8px;
+}
