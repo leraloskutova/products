@@ -1,5 +1,28 @@
-<h3 class="title">Cart</h3>
-<div class="cart-item" *ngFor="let product of products">
-  <span>{{product.title}} </span>
+<h3 id="title-cart">Cart ({{count}})</h3>
+<button type="button"
+        class="btn btn-outline-secondary"
+        (click)="clearCart()">Clear</button>
+<div class=""></div>
+<div class="cart-item" *ngFor="let product of cartList">
+  <span style="width: 300px">{{product.title}} </span>
   <span>{{product.price | currency}}</span>
+  <span>
+    <button type="button"
+            class="btn minus">
+      <i class="material-icons">remove</i>
+    </button>
+    <input class="input-value" autocomplete="off"
+           aria-valuemin="1"
+           aria-valuemax="10"
+           value="1">
+    <button type="button"
+            class="btn plus">
+      <i class="material-icons">add</i>
+    </button>
+    <button type="button"
+            class="btn clear"
+            style="margin-left: 15px">
+      <i class="material-icons">delete_forever</i>
+    </button>
+  </span>
 </div>

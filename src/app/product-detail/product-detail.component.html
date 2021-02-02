@@ -30,6 +30,24 @@
     <div class="line"></div>
     <div class="product-price">
       <span>{{product.price | currency}}</span>
+      <span>
+        <button type="button"
+            class="btn minus">
+          <i class="material-icons">remove</i>
+        </button>
+      </span>
+      <span>
+        <input class="input-value" autocomplete="off"
+           aria-valuemin="1"
+           aria-valuemax="10"
+           value="1">
+      </span>
+      <span>
+        <button type="button"
+            class="btn plus">
+          <i class="material-icons">add</i>
+        </button>
+      </span>
       <button type="button"
               class="btn btn-outline-primary"
               (click)="addToCart(product)">Buy</button>

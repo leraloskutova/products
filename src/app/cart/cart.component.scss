@@ -1,6 +1,12 @@
-.title {
+#title-cart {
   text-align: center;
   margin: 15px 0;
+}
+
+.btn-outline-secondary {
+  position: absolute;
+  right: 0;
+  top: 0;
 }
 
 .cart-item {
@@ -15,4 +21,28 @@
   background-color: #EEEEEE;
   margin: auto;
   margin-bottom: 8px;
+
+  .minus,
+  .plus,
+  .clear {
+    height: 25px;
+    width: 25px;
+    padding: 0;
+    color: #afafaf;
+  }
+
+  .minus:hover,
+  .plus:hover,
+  .clear:hover {
+    color: #333333;
+  }
+
+  .input-value {
+    width: 25px;
+    border: none;
+    padding: 0;
+    text-align: center;
+    vertical-align: middle;
+    background-color: transparent;
+  }
 }
