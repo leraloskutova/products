@@ -10,10 +10,9 @@ import { takeUntil } from 'rxjs/operators';
 })
 
 export class CartComponent implements OnInit, OnDestroy {
+  // @ts-ignore
   cartList;
-  count;
-  // productIndex: number;
-  // id: number;
+  count?: number;
 
   private unsubscribe = new Subject();
 
@@ -25,6 +24,7 @@ export class CartComponent implements OnInit, OnDestroy {
     this.getCartList();
   }
 
+  // tslint:disable-next-line:typedef
   ngOnDestroy() {
     this.unsubscribe.next();
     this.unsubscribe.complete();
@@ -39,15 +39,14 @@ export class CartComponent implements OnInit, OnDestroy {
           console.log(data);
           this.cartList = data;
         });
-    this.checkCart();
-    this.count = this.cartList.length;
-  }
-  /**
-   * Проверка на наличие продуктов в корзине.
-   */
-  checkCart(): void {
-    if (!localStorage.getItem('cart')) {
-      document.getElementById('title-cart').innerHTML = 'Your cart is empty!';
+    this.count = this.cartService.getCount();
+    if (this.count === 0) {
+      // @ts-ignore
+      document.getElementById('title-cart').innerHTML = '';
+      // @ts-ignore
+      document.getElementById('btn-clear').setAttribute('disabled', 'disabled');
+      // @ts-ignore
+      document.getElementById('img-empty').style.visibility = 'visible';
     }
   }
   /**
@@ -62,10 +61,10 @@ export class CartComponent implements OnInit, OnDestroy {
   /**
    * Удаление одного продукта в корзине.
    */
-  // deleteCartItem(productId: number) {
-  //   this.cartService.removeFromLocalstorage(productId);
-  //
-  //   var index = this.product.findIndex(x => x.id == productId);
-  //   this.product.splice(index, 1); // удаляем с this.product тоже
-  // }
+  // tslint:disable-next-line:typedef
+  deleteCartProduct(productId: number) {
+    window.alert('Your product has been removed!');
+    window.location.reload();
+    this.cartService.removeFromLocalstorage(productId);
+  }
 }

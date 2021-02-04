@@ -7,19 +7,21 @@ import { BehaviorSubject } from 'rxjs';
 export class CartService {
   cart = new BehaviorSubject([]);
   products = [];
+  count?: number;
 
   constructor() {
     this.fillCart();
   }
   /**
-   * Проверка на наличие продуктов в корзине.
+   * Проверка на наличие продуктов в корзине и их вывод.
    */
+  // tslint:disable-next-line:typedef
   fillCart() {
     if (!localStorage.getItem('cart')) {
       return;
     }
 
-    var cart = JSON.parse(localStorage.getItem('cart'));
+    const cart = JSON.parse(localStorage.getItem('cart') as string);
     this.products = cart;
     this.cart.next(this.products );
     return this.cart;
@@ -27,7 +29,8 @@ export class CartService {
   /**
    * Добавление продукта в корзину.
    */
-  addToCart(product): void {
+  addToCart(product: any): void {
+    // @ts-ignore
     this.products.push(product);
     this.cart.next(this.products);
     this.setToLocalStorage(product);
@@ -35,32 +38,39 @@ export class CartService {
   /**
    * Хранение списка продуктов в корзине между сессиями.
    */
-  private setToLocalStorage(product?): void {
+  private setToLocalStorage(product?: any): void {
     if (!localStorage.getItem('cart')) {
       localStorage.setItem('cart', JSON.stringify([]));
     } else {
       localStorage.setItem('cart', JSON.stringify(this.products));
-      this.cart.next(JSON.parse(localStorage.getItem('cart')));
+      this.cart.next(JSON.parse(localStorage.getItem('cart') as string));
     }
     if (!product) {
       return;
     }
   }
   /**
+   * Подсчет количества продуктов в корзине.
+   */
+  getCount(): number {
+    this.count = this.products.length;
+    return this.count;
+  }
+  /**
    * Очищение корзины.
    */
-  clearCart() {
+  clearCart(): any[] {
     this.products = [];
     return this.products;
   }
   /**
    * Удаление одного продукта в корзине.
    */
-  // removeFromLocalstorage(id) {
-  //   var cart = JSON.parse(localStorage.getItem('cart'));
-  //   var index = cart.findIndex(x => x.id == id);
-  //
-  //   cart.splice(index, 1); // удаляем с локалсторедж
-  //   localStorage.setItem('cart', JSON.stringify(cart));
-  // }
+  // tslint:disable-next-line:typedef
+  removeFromLocalstorage(id: number) {
+    const cart = JSON.parse(localStorage.getItem('cart') as string);
+    const index = cart.findIndex((x: { id: any; }) => x.id === id);
+    cart.splice(index, 1);
+    localStorage.setItem('cart', JSON.stringify(cart));
+  }
 }

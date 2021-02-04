@@ -26,10 +26,11 @@ export class ProductDetailComponent implements OnInit {
   getProduct(): void {
     // @ts-ignore
     const id = +this.route.snapshot.paramMap.get('id');
-    this.httpService.getProduct(id)
-      .subscribe(product => this.product = product);
+    // @ts-ignore
+    this.httpService.getProduct(id).subscribe(product => this.product = product);
   }
-  addToCart(product) {
+  // tslint:disable-next-line:typedef
+  addToCart(product: any) {
     window.alert('Your product has been added to the cart!');
     this.cartService.addToCart(product);
   }

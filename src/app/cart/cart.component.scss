@@ -9,6 +9,15 @@
   top: 0;
 }
 
+#img-empty {
+  position: absolute;
+  top: 0;
+  width: 100%;
+  margin: auto;
+  text-align: center;
+  visibility: hidden;
+}
+
 .cart-item {
   width: 100%;
   min-width: 400px;
@@ -24,7 +33,7 @@
 
   .minus,
   .plus,
-  .clear {
+  .delete {
     height: 25px;
     width: 25px;
     padding: 0;
@@ -33,7 +42,7 @@
 
   .minus:hover,
   .plus:hover,
-  .clear:hover {
+  .delete:hover {
     color: #333333;
   }
 
