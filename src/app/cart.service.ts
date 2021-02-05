@@ -1,5 +1,6 @@
 import { Injectable } from '@angular/core';
 import { BehaviorSubject } from 'rxjs';
+import { Product } from './product';
 
 @Injectable({
   providedIn: 'root'
@@ -7,7 +8,6 @@ import { BehaviorSubject } from 'rxjs';
 export class CartService {
   cart = new BehaviorSubject([]);
   products = [];
-  count?: number;
 
   constructor() {
     this.fillCart();
@@ -23,13 +23,16 @@ export class CartService {
 
     const cart = JSON.parse(localStorage.getItem('cart') as string);
     this.products = cart;
-    this.cart.next(this.products );
+    this.cart.next(this.products);
     return this.cart;
   }
   /**
    * Добавление продукта в корзину.
    */
   addToCart(product: any): void {
+    // @ts-ignore
+    product.quantity = 1;
+    product.totalPrice = product.price;
     // @ts-ignore
     this.products.push(product);
     this.cart.next(this.products);
@@ -53,8 +56,7 @@ export class CartService {
    * Подсчет количества продуктов в корзине.
    */
   getCount(): number {
-    this.count = this.products.length;
-    return this.count;
+    return this.products.reduce((sum: any, x: { quantity: any; }) => sum + x.quantity, 0);
   }
   /**
    * Очищение корзины.
@@ -72,5 +74,16 @@ export class CartService {
     const index = cart.findIndex((x: { id: any; }) => x.id === id);
     cart.splice(index, 1);
     localStorage.setItem('cart', JSON.stringify(cart));
+  }
+  /**
+   * Изменение количества продуктов в корзине.
+   */
+  // tslint:disable-next-line:typedef
+  changeQuantity(product: Product) {
+    // @ts-ignore
+    product.totalPrice = product.price * product.quantity;
+    this.cart.next(this.products);
+    localStorage.setItem('cart', JSON.stringify(this.products));
+    return this.cart;
   }
 }

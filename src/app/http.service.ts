@@ -22,6 +22,7 @@ export class HttpService{
    */
   getProducts(page: number, itemsPerPage: number): Observable<Page> {
     let products = this.http.get<any[]>(this.url);
+    window.scrollTo(0, 0);
     return this.getPageItems(products, page, itemsPerPage);
   }
   private getPageItems(products: Observable<Array<any>>, page: number, itemsPerPage: number): Observable<Page> {

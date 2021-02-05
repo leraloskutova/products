@@ -8,4 +8,6 @@ export class Product {
   description?: string;
   category?: string;
   image?: string;
+  quantity?: number;
+  totalPrice?: number;
 }

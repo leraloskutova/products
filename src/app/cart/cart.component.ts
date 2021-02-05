@@ -2,6 +2,7 @@ import { Component, OnInit, OnDestroy } from '@angular/core';
 import { CartService } from '../cart.service';
 import { Subject } from 'rxjs';
 import { takeUntil } from 'rxjs/operators';
+import { Product } from '../product';
 
 @Component({
   selector: 'app-cart',
@@ -47,6 +48,9 @@ export class CartComponent implements OnInit, OnDestroy {
       document.getElementById('btn-clear').setAttribute('disabled', 'disabled');
       // @ts-ignore
       document.getElementById('img-empty').style.visibility = 'visible';
+    } else {
+      // @ts-ignore
+      document.getElementById('total-price').style.visibility = 'visible';
     }
   }
   /**
@@ -66,5 +70,18 @@ export class CartComponent implements OnInit, OnDestroy {
     window.alert('Your product has been removed!');
     window.location.reload();
     this.cartService.removeFromLocalstorage(productId);
+  }
+  /**
+   * Изменение количества продуктов в корзине.
+   */
+  // tslint:disable-next-line:typedef
+  changeQuantity(product: Product) {
+    this.cartService.changeQuantity(product);
+  }
+  /**
+   * Подсчет общей стоимости продуктов в корзине.
+   */
+  get total(): void {
+    return this.cartList.reduce((sum: any, x: { totalPrice: any; }) => sum + x.totalPrice, 0);
   }
 }

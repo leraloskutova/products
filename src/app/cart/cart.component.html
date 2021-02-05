@@ -7,25 +7,26 @@
 <div class="cart-item" *ngFor="let product of cartList">
   <span style="width: 300px">{{product.title}} </span>
   <span>{{product.price | currency}}</span>
+  <span class="product-total-price">{{product.totalPrice | currency}}</span>
   <span>
-    <button type="button"
-            class="btn minus">
-      <i class="material-icons">remove</i>
-    </button>
     <input class="input-value" autocomplete="off"
-           aria-valuemin="1"
-           aria-valuemax="10"
-           value="1">
-    <button type="button"
-            class="btn plus">
-      <i class="material-icons">add</i>
-    </button>
+           type="number"
+           min="1"
+           max="10"
+           [(ngModel)]="product.quantity" (ngModelChange)="changeQuantity(product)">
     <button type="button"
             class="btn delete" (click)="deleteCartProduct(product.id)"
             style="margin-left: 15px">
       <i class="material-icons">delete_forever</i>
     </button>
   </span>
+</div>
+
+<div class="total"
+     id="total-price">
+  <div class="line">
+    <p>Total: {{total | currency}}</p>
+  </div>
 </div>
 <div id="img-empty">
   <img src="../assets/img/empty-cart.png" alt="">
