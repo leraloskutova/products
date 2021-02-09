@@ -29,3 +29,10 @@
                 [pageSize]="itemsPerPage"
                 [boundaryLinks]="true">
 </ngb-pagination>
+<span class="pageSize">
+  <select id="select" [(ngModel)]="selectedItem" (ngModelChange)="changeSize(selectedItem)">
+    <option value="5">5</option>
+    <option value="10">10</option>
+    <option value="25">25</option>
+  </select>
+</span>

@@ -18,6 +18,8 @@ export class ProductsComponent implements OnInit {
   // @ts-ignore
   public collectionSize: number;
   public itemsPerPage = 5;
+  // @ts-ignore
+  public selectedItem: number;
   /**
    * Конструктор класса AppComponent.
    */
@@ -28,16 +30,32 @@ export class ProductsComponent implements OnInit {
   ngOnInit(): void {
   }
   onPageChanged(): void {
+    localStorage.setItem('page', String(this.page));
     this.getProducts();
   }
   /**
    * Получение списка продуктов.
    */
   getProducts(): void {
+    if (localStorage.getItem('itemsPerPage')) {
+      // @ts-ignore
+      this.itemsPerPage = localStorage.getItem('itemsPerPage');
+    }
     this.httpService.getProducts(this.page, this.itemsPerPage)
       .subscribe(p => {
         this.products = p.rows;
         this.collectionSize = p.totalCount;
       });
+  }
+  /**
+   * Изменение размера страницы.
+   */
+  // tslint:disable-next-line:typedef
+  changeSize(selectedItem: number) {
+    this.itemsPerPage = selectedItem;
+    localStorage.setItem('itemsPerPage', String(this.itemsPerPage));
+    // @ts-ignore
+    localStorage.setItem('page', 1);
+    window.location.reload();
   }
 }

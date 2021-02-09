@@ -5,9 +5,17 @@
         (click)="clearCart()">Clear</button>
 
 <div class="cart-item" *ngFor="let product of cartList">
-  <span style="width: 300px">{{product.title}} </span>
-  <span>{{product.price | currency}}</span>
-  <span class="product-total-price">{{product.totalPrice | currency}}</span>
+  <span>
+    <a routerLink="/products/{{product.id}}" target="_blank">
+    <img class="item-image" src="{{product.image}}"
+         alt="">
+  </a>
+  </span>
+  <span style="width: 300px">
+    <a routerLink="/products/{{product.id}}" target="_blank">{{product.title}}</a>
+  </span>
+  <span style="width: 60px">{{product.price | currency}}</span>
+  <span style="width: 60px" class="product-total-price">{{product.totalPrice | currency}}</span>
   <span>
     <input class="input-value" autocomplete="off"
            type="number"

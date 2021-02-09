@@ -37,7 +37,6 @@ export class CartComponent implements OnInit, OnDestroy {
     this.cartService.cart.pipe(takeUntil(this.unsubscribe))
       .subscribe(
         data => {
-          console.log(data);
           this.cartList = data;
         });
     this.count = this.cartService.getCount();
@@ -58,7 +57,7 @@ export class CartComponent implements OnInit, OnDestroy {
    */
   clearCart(): void {
     window.alert('Your cart has been cleared!');
-    localStorage.clear();
+    localStorage.removeItem('cart');
     this.cartService.clearCart();
     window.location.reload();
   }
@@ -81,7 +80,8 @@ export class CartComponent implements OnInit, OnDestroy {
   /**
    * Подсчет общей стоимости продуктов в корзине.
    */
-  get total(): void {
+  // tslint:disable-next-line:typedef
+  get total() {
     return this.cartList.reduce((sum: any, x: { totalPrice: any; }) => sum + x.totalPrice, 0);
   }
 }

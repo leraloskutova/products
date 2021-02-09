@@ -11,7 +11,7 @@
 
 .cart-item {
   width: 100%;
-  min-width: 400px;
+  min-width: 800px;
   max-width: 800px;
   display: flex;
   flex-direction: row;
@@ -21,6 +21,24 @@
   background-color: #EEEEEE;
   margin: auto;
   margin-bottom: 8px;
+
+  .item-image {
+    width: 100px;
+    height: 100px;
+    cursor: pointer;
+  }
+
+  .item-image:hover {
+    border: 1px solid #e8e8e8;
+    box-shadow: 0 0 10px rgba(0,0,0,0.5);
+  }
+
+  a {
+    color: #333;
+  }
+  a:hover {
+    color: red;
+  }
 
   .delete {
     height: 25px;
@@ -50,6 +68,7 @@
   font-weight: bold;
   font-size: 24px;
   text-align: right;
+  margin-bottom: 100px;
 }
 
 #total-price {

@@ -18,17 +18,22 @@ export class HttpService{
   constructor(private http: HttpClient){ }
   /**
    * Запрос на получение списка продуктов.
-   * @return {Object} person
    */
   getProducts(page: number, itemsPerPage: number): Observable<Page> {
-    let products = this.http.get<any[]>(this.url);
+    const products = this.http.get<any[]>(this.url);
     window.scrollTo(0, 0);
+    if (localStorage.getItem('itemsPerPage')) {
+      itemsPerPage = Number(localStorage.getItem('itemsPerPage'));
+    }
+    if (localStorage.getItem('page')) {
+      page = Number(localStorage.getItem('page'));
+    }
     return this.getPageItems(products, page, itemsPerPage);
   }
   private getPageItems(products: Observable<Array<any>>, page: number, itemsPerPage: number): Observable<Page> {
     return products.pipe(
       map(u => {
-        let startIndex = itemsPerPage * (page - 1);
+        const startIndex = itemsPerPage * (page - 1);
         return new Page(u.length, u.slice(startIndex, startIndex + itemsPerPage));
       })
     );

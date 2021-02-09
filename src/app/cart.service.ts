@@ -82,7 +82,6 @@ export class CartService {
   changeQuantity(product: Product) {
     // @ts-ignore
     product.totalPrice = product.price * product.quantity;
-    this.cart.next(this.products);
     localStorage.setItem('cart', JSON.stringify(this.products));
     return this.cart;
   }
