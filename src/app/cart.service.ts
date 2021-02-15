@@ -18,6 +18,7 @@ export class CartService {
   // tslint:disable-next-line:typedef
   fillCart() {
     if (!localStorage.getItem('cart')) {
+      localStorage.setItem('cart', JSON.stringify([]));
       return;
     }
 
@@ -30,13 +31,31 @@ export class CartService {
    * Добавление продукта в корзину.
    */
   addToCart(product: any): void {
-    // @ts-ignore
     product.quantity = 1;
     product.totalPrice = product.price;
-    // @ts-ignore
-    this.products.push(product);
-    this.cart.next(this.products);
-    this.setToLocalStorage(product);
+    const cart = JSON.parse(localStorage.getItem('cart') as string);
+    this.products = cart;
+    if (cart.length) {
+      let count = 0;
+      for (const value of cart) {
+        if (product.id === value.id){
+          value.quantity += 1;
+          this.cart.next(this.products);
+          this.setToLocalStorage(product);
+        } else {
+          count += 1;
+        }
+      }
+      if (count === cart.length) {
+        cart.push(product);
+        this.cart.next(this.products);
+        this.setToLocalStorage(product);
+      }
+    } else {
+      cart.push(product);
+      this.cart.next(this.products);
+      this.setToLocalStorage(product);
+    }
   }
   /**
    * Хранение списка продуктов в корзине между сессиями.

@@ -6,19 +6,16 @@
 <div class="product-main" *ngIf="product">
   <div class="product-image">
     <div class="image-viewer">
-      <div id="samples">
-        <img class="magnifier-image"
-             id="zoom"
-             alt=""
-             width="300px"
-             onmousemove="zoomIn(event)"
-             onmouseout="zoomOut()"
-             src="{{product.image}}">
-      </div>
+      <div id="zoom-lens"></div>
+      <img class="magnifier-image"
+           id="zoom"
+           alt=""
+           onmouseover="zoomIn()"
+           onmouseout="zoom()"
+           src="{{product.image}}">
       <div>
-        <div id="preview"
-             style="background-image: url({{product.image}})"
-             onmousemove="zoomIn(event)"></div>
+        <div id="zoom-result"
+             class="result-image"></div>
       </div>
     </div>
   </div>

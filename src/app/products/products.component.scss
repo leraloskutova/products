@@ -2,6 +2,7 @@
   text-align: center;
   margin: 15px 0;
 }
+
 .products {
   min-width: 900px;
 
@@ -62,6 +63,7 @@
             a {
               color: #333;
             }
+
             a:hover {
               color: red;
             }
@@ -94,12 +96,13 @@
     }
   }
 }
+
 .page {
   display: flex;
   margin: auto;
 }
+
 .pageSize {
-  //margin-left: 50px;
   float: right;
   margin-top: -50px;;
 }
