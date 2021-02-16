@@ -1,8 +1,26 @@
 $top_bar_color: #0075b0;
+.breadcrumb {
+  background: none;
+  margin-bottom: 0;
+
+  .active:first-letter {
+    text-transform: uppercase;
+  }
+
+  a {
+    color: $top_bar_color;
+  }
+
+  a:hover {
+    text-decoration: none;
+    color: #d60000;
+  }
+}
+
 .product-main {
   background-color: #FFF;
   box-shadow: 0 0 5px rgba(102, 102, 102, 0.5);
-  margin: 20px 0;
+  margin-bottom: 20px;
   border-radius: 15px;
   border: 1px solid #e8e8e8;
   padding: 15px 25px;

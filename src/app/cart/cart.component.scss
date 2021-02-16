@@ -3,7 +3,7 @@
   margin: 15px 0;
 }
 
-.btn-outline-secondary {
+.clear{
   position: absolute;
   right: 0;
   top: 0;
@@ -18,7 +18,8 @@
   justify-content: space-between;
   padding: 16px 32px;
   border-radius: 2px;
-  background-color: #EEEEEE;
+  background-color: #f9f9f9;
+  border: 1px solid #d2d2d2;
   margin: auto;
   margin-bottom: 8px;
 
@@ -33,16 +34,22 @@
     box-shadow: 0 0 10px rgba(0,0,0,0.5);
   }
 
-  a {
+  .product-title {
     color: #333;
   }
-  a:hover {
-    color: red;
+
+  .product-title:hover {
+    color: #d60000;
+  }
+
+  .product-total-price {
+    font-weight: bold;
   }
 
   .delete {
     height: 25px;
     width: 25px;
+    margin-left: 15px;
     padding: 0;
     color: #afafaf;
   }

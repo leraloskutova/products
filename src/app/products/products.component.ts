@@ -1,6 +1,6 @@
-import { Component, OnInit } from '@angular/core';
-import { HttpService } from '../http.service';
-import { Product } from '../product';
+import {Component, OnInit} from '@angular/core';
+import {HttpService} from '../http.service';
+import {Product} from '../product';
 
 @Component({
   selector: 'app-products',
@@ -21,7 +21,7 @@ export class ProductsComponent implements OnInit {
   // @ts-ignore
   public selectedItem: number;
   /**
-   * Конструктор класса AppComponent.
+   * Конструктор класса ProductsComponent.
    */
   constructor(private httpService: HttpService){
     this.page = 1;

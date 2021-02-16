@@ -1,9 +1,8 @@
-import { Component, OnInit } from '@angular/core';
-import { ActivatedRoute } from '@angular/router';
-
-import { Product } from '../product';
-import { HttpService } from '../http.service';
-import { CartService } from '../cart.service';
+import {Component, OnInit } from '@angular/core';
+import {ActivatedRoute } from '@angular/router';
+import {Product} from '../product';
+import {HttpService} from '../http.service';
+import {CartService} from '../cart.service';
 
 @Component({
   selector: 'app-product-detail',
@@ -33,5 +32,6 @@ export class ProductDetailComponent implements OnInit {
   addToCart(product: any) {
     window.alert('Your product has been added to the cart!');
     this.cartService.addToCart(product);
+    window.location.reload();
   }
 }

@@ -1,7 +1,8 @@
-<nav class="menu">
-  <a [routerLink]="['/']">Products</a>
-  <span> > </span>
-  <a href="#">{{product.category}}</a>
+<nav aria-label="breadcrumb">
+  <ol class="breadcrumb">
+    <li class="breadcrumb-item"><a [routerLink]="['/']">Products</a></li>
+    <li class="breadcrumb-item active" aria-current="page"><a href="#">{{product.category}}</a></li>
+  </ol>
 </nav>
 <div class="product-main" *ngIf="product">
   <div class="product-image">

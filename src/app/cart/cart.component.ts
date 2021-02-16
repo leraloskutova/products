@@ -1,8 +1,8 @@
-import { Component, OnInit, OnDestroy } from '@angular/core';
-import { CartService } from '../cart.service';
-import { Subject } from 'rxjs';
-import { takeUntil } from 'rxjs/operators';
-import { Product } from '../product';
+import {Component, OnInit, OnDestroy} from '@angular/core';
+import {CartService} from '../cart.service';
+import {Subject} from 'rxjs';
+import {takeUntil} from 'rxjs/operators';
+import {Product} from '../product';
 
 @Component({
   selector: 'app-cart',
@@ -56,19 +56,21 @@ export class CartComponent implements OnInit, OnDestroy {
    * Очищение корзины.
    */
   clearCart(): void {
-    window.alert('Your cart has been cleared!');
-    localStorage.removeItem('cart');
-    this.cartService.clearCart();
-    window.location.reload();
+    if (window.confirm('Do you really want to clear the cart?')) {
+      localStorage.removeItem('cart');
+      this.cartService.clearCart();
+      window.location.reload();
+    }
   }
   /**
    * Удаление одного продукта в корзине.
    */
   // tslint:disable-next-line:typedef
   deleteCartProduct(productId: number) {
-    window.alert('Your product has been removed!');
-    window.location.reload();
-    this.cartService.removeFromLocalstorage(productId);
+    if (window.confirm('Do you really want to delete the product?')) {
+      window.location.reload();
+      this.cartService.removeFromLocalstorage(productId);
+    }
   }
   /**
    * Изменение количества продуктов в корзине.

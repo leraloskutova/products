@@ -1,21 +1,25 @@
 <h3 id="title-cart">Cart ({{count}})</h3>
 <button type="button"
-        class="btn btn-outline-secondary"
+        class="btn btn-outline-secondary clear"
         id="btn-clear"
         (click)="clearCart()">Clear</button>
 
 <div class="cart-item" *ngFor="let product of cartList">
   <span>
-    <a routerLink="/products/{{product.id}}" target="_blank">
-    <img class="item-image" src="{{product.image}}"
-         alt="">
-  </a>
+    <a routerLink="/products/{{product.id}}"
+       target="_blank">
+      <img class="item-image"
+           src="{{product.image}}" alt="">
+    </a>
   </span>
   <span style="width: 300px">
-    <a routerLink="/products/{{product.id}}" target="_blank">{{product.title}}</a>
+    <a class="product-title"
+       routerLink="/products/{{product.id}}"
+       target="_blank">{{product.title}}</a>
   </span>
   <span style="width: 60px">{{product.price | currency}}</span>
-  <span style="width: 60px" class="product-total-price">{{product.totalPrice | currency}}</span>
+  <span style="width: 60px"
+        class="product-total-price">{{product.totalPrice | currency}}</span>
   <span>
     <input class="input-value" autocomplete="off"
            type="number"
@@ -23,8 +27,7 @@
            max="10"
            [(ngModel)]="product.quantity" (ngModelChange)="changeQuantity(product)">
     <button type="button"
-            class="btn delete" (click)="deleteCartProduct(product.id)"
-            style="margin-left: 15px">
+            class="btn delete" (click)="deleteCartProduct(product.id)">
       <i class="material-icons">delete_forever</i>
     </button>
   </span>
