@@ -38,8 +38,7 @@ export class ProductsComponent implements OnInit {
    */
   getProducts(): void {
     if (localStorage.getItem('itemsPerPage')) {
-      // @ts-ignore
-      this.itemsPerPage = localStorage.getItem('itemsPerPage');
+      this.itemsPerPage = Number(localStorage.getItem('itemsPerPage'));
     }
     this.httpService.getProducts(this.page, this.itemsPerPage)
       .subscribe(p => {
@@ -50,12 +49,10 @@ export class ProductsComponent implements OnInit {
   /**
    * Изменение размера страницы.
    */
-  // tslint:disable-next-line:typedef
-  changeSize(selectedItem: number) {
+  changeSize(selectedItem: number): void {
     this.itemsPerPage = selectedItem;
     localStorage.setItem('itemsPerPage', String(this.itemsPerPage));
-    // @ts-ignore
-    localStorage.setItem('page', 1);
+    localStorage.setItem('page', String(1));
     window.location.reload();
   }
 }

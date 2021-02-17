@@ -11,8 +11,7 @@ import {Product} from '../product';
 })
 
 export class CartComponent implements OnInit, OnDestroy {
-  // @ts-ignore
-  cartList;
+  cartList: any;
   count?: number;
 
   private unsubscribe = new Subject();
@@ -24,9 +23,7 @@ export class CartComponent implements OnInit, OnDestroy {
   ngOnInit(): void {
     this.getCartList();
   }
-
-  // tslint:disable-next-line:typedef
-  ngOnDestroy() {
+  ngOnDestroy(): void {
     this.unsubscribe.next();
     this.unsubscribe.complete();
   }
@@ -63,10 +60,9 @@ export class CartComponent implements OnInit, OnDestroy {
     }
   }
   /**
-   * Удаление одного продукта в корзине.
+   * Удаление одного продукта из корзины.
    */
-  // tslint:disable-next-line:typedef
-  deleteCartProduct(productId: number) {
+  deleteCartProduct(productId: number): void {
     if (window.confirm('Do you really want to delete the product?')) {
       window.location.reload();
       this.cartService.removeFromLocalstorage(productId);
@@ -75,15 +71,13 @@ export class CartComponent implements OnInit, OnDestroy {
   /**
    * Изменение количества продуктов в корзине.
    */
-  // tslint:disable-next-line:typedef
-  changeQuantity(product: Product) {
+  changeQuantity(product: Product): void {
     this.cartService.changeQuantity(product);
   }
   /**
    * Подсчет общей стоимости продуктов в корзине.
    */
-  // tslint:disable-next-line:typedef
-  get total() {
+  get total(): number {
     return this.cartList.reduce((sum: any, x: { totalPrice: any; }) => sum + x.totalPrice, 0);
   }
 }

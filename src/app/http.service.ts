@@ -39,6 +39,6 @@ export class HttpService{
     );
   }
   getProduct(id: number): Observable<Array<any>> {
-    return this.http.get<any[]>(`https://fakestoreapi.com/products/${id}`);
+    return this.http.get<any[]>(this.url + '/' + id);
   }
 }

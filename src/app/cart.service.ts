@@ -15,8 +15,7 @@ export class CartService {
   /**
    * Проверка на наличие продуктов в корзине и их вывод.
    */
-  // tslint:disable-next-line:typedef
-  fillCart() {
+  fillCart(): any {
     if (!localStorage.getItem('cart')) {
       localStorage.setItem('cart', JSON.stringify([]));
       return;
@@ -60,7 +59,7 @@ export class CartService {
   /**
    * Хранение списка продуктов в корзине между сессиями.
    */
-  private setToLocalStorage(product?: any): void {
+  private setToLocalStorage(product: any): void {
     if (!localStorage.getItem('cart')) {
       localStorage.setItem('cart', JSON.stringify([]));
     } else {
@@ -85,10 +84,9 @@ export class CartService {
     return this.products;
   }
   /**
-   * Удаление одного продукта в корзине.
+   * Удаление одного продукта из корзины.
    */
-  // tslint:disable-next-line:typedef
-  removeFromLocalstorage(id: number) {
+  removeFromLocalstorage(id: number): void {
     const cart = JSON.parse(localStorage.getItem('cart') as string);
     const index = cart.findIndex((x: { id: any; }) => x.id === id);
     cart.splice(index, 1);
@@ -97,9 +95,7 @@ export class CartService {
   /**
    * Изменение количества продуктов в корзине.
    */
-  // tslint:disable-next-line:typedef
-  changeQuantity(product: Product) {
-    // @ts-ignore
+  changeQuantity(product: Product): any {
     product.totalPrice = product.price * product.quantity;
     localStorage.setItem('cart', JSON.stringify(this.products));
     return this.cart;

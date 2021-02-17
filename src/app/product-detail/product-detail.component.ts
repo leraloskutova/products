@@ -10,26 +10,23 @@ import {CartService} from '../cart.service';
   styleUrls: ['./product-detail.component.scss']
 })
 export class ProductDetailComponent implements OnInit {
-  product: Product = new Product();
-  // product: any;
+  // product: Product = new Product();
+  product: any;
   constructor(
     private route: ActivatedRoute,
     private httpService: HttpService,
     private cartService: CartService
-  ) {}
-
-  ngOnInit(): void {
+  ){
     this.getProduct();
   }
-
+  ngOnInit(): void {
+  }
   getProduct(): void {
     // @ts-ignore
     const id = +this.route.snapshot.paramMap.get('id');
-    // @ts-ignore
     this.httpService.getProduct(id).subscribe(product => this.product = product);
   }
-  // tslint:disable-next-line:typedef
-  addToCart(product: any) {
+  addToCart(product: any): void {
     window.alert('Your product has been added to the cart!');
     this.cartService.addToCart(product);
     window.location.reload();
