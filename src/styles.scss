@@ -16,3 +16,15 @@ app-top-bar h1 {
   color: white;
   margin: 0;
 }
+
+@media (min-width: 1224px) {
+  app-top-bar {
+    min-width: 1000px;
+  }
+}
+
+@media (min-width: 320px) and (max-width: 1224px), (max-width: 320px) {
+  app-top-bar {
+    min-width: 320px;
+  }
+}

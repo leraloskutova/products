@@ -12,7 +12,7 @@
            src="{{product.image}}" alt="">
     </a>
   </span>
-  <span style="width: 300px">
+  <span class="item-title" style="width: 300px">
     <a class="product-title"
        routerLink="/products/{{product.id}}"
        target="_blank">{{product.title}}</a>
@@ -39,6 +39,6 @@
     <p>Total: {{total | currency}}</p>
   </div>
 </div>
-<div id="img-empty">
+<div id="img-empty" class="img-empty">
   <img src="../assets/img/empty-cart.png" alt="">
 </div>
