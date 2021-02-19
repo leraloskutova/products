@@ -2,6 +2,7 @@ import {Injectable} from '@angular/core';
 import {Observable} from 'rxjs';
 import {HttpClient} from '@angular/common/http';
 import {Page} from './page';
+import {Product} from './product';
 import {map} from 'rxjs/operators';
 
 @Injectable({
@@ -38,7 +39,7 @@ export class HttpService{
       })
     );
   }
-  getProduct(id: number): Observable<Array<any>> {
-    return this.http.get<any[]>(this.url + '/' + id);
+  getProduct(id: number): Observable<Product> {
+    return this.http.get<Product>(this.url + '/' + id);
   }
 }

@@ -29,7 +29,7 @@ export class CartService {
   /**
    * Добавление продукта в корзину.
    */
-  addToCart(product: any): void {
+  addToCart(product: Product): void {
     product.quantity = 1;
     product.totalPrice = product.price;
     const cart = JSON.parse(localStorage.getItem('cart') as string);
@@ -59,7 +59,7 @@ export class CartService {
   /**
    * Хранение списка продуктов в корзине между сессиями.
    */
-  private setToLocalStorage(product: any): void {
+  private setToLocalStorage(product: Product): void {
     if (!localStorage.getItem('cart')) {
       localStorage.setItem('cart', JSON.stringify([]));
     } else {
@@ -96,6 +96,7 @@ export class CartService {
    * Изменение количества продуктов в корзине.
    */
   changeQuantity(product: Product): any {
+    // @ts-ignore
     product.totalPrice = product.price * product.quantity;
     localStorage.setItem('cart', JSON.stringify(this.products));
     return this.cart;
