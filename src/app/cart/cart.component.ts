@@ -41,7 +41,7 @@ export class CartComponent implements OnInit, OnDestroy {
       // @ts-ignore
       document.getElementById('title-cart').innerHTML = '';
       // @ts-ignore
-      document.getElementById('btn-clear').setAttribute('disabled', 'disabled');
+      document.getElementById('btn-clear').style.visibility = 'hidden';
       // @ts-ignore
       document.getElementById('img-empty').style.visibility = 'visible';
     } else {
