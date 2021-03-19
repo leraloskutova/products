@@ -12,7 +12,7 @@ import {map} from 'rxjs/operators';
  * Класс для работы с запросами.
  */
 export class HttpService{
-  private url = 'https://fakestoreapi.com/products';
+  private url = 'https://fakestoreapi.herokuapp.com/products';
   /**
    * Конструктор класса HttpService.
    */
