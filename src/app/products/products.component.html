@@ -1,7 +1,7 @@
 <h1 class="title">{{title}}</h1>
 <div class="products">
   <ul class="product">
-    <li class="item" *ngFor="let product of products">
+    <li class="item" *ngFor="let product of (products | async)">
       <div class="product-card">
         <div class="product-image">
           <a routerLink="/products/{{product.id}}" target="_blank">
@@ -23,14 +23,13 @@
   </ul>
 </div>
 <ngb-pagination class="d-flex justify-content-center"
-                [collectionSize]="collectionSize"
-                [(page)]="page"
-                (pageChange)="onPageChanged()"
-                [pageSize]="itemsPerPage"
+                [collectionSize]="totalCount"
+                (pageChange)="onPageChanged($event)"
+                [pageSize]="itemsPerPage.value"
                 [boundaryLinks]="true">
 </ngb-pagination>
 <span class="pageSize">
-  <select id="select" [(ngModel)]="selectedItem" (ngModelChange)="changeSize(selectedItem)">
+  <select id="select" [value]="itemsPerPage" (change)="changeSize($event.target)">
     <option value="5">5</option>
     <option value="10">10</option>
     <option value="25">25</option>

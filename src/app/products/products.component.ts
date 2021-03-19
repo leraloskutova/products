@@ -1,4 +1,7 @@
 import {Component, OnInit} from '@angular/core';
+import { BehaviorSubject, combineLatest, Observable } from 'rxjs';
+import { map, switchMap } from 'rxjs/operators';
+import { ProductListItem } from '../common/interfaces/api/product.interface';
 import {HttpService} from '../http.service';
 import {Product} from '../product';
 
@@ -12,47 +15,54 @@ import {Product} from '../product';
  * Класс компоненты приложения.
  */
 export class ProductsComponent implements OnInit {
-  title = 'Products';
-  products: Product[] = [];
-  public page: number;
-  // @ts-ignore
-  public collectionSize: number;
-  public itemsPerPage = 5;
-  // @ts-ignore
-  public selectedItem: number;
+  public title = 'Products';
+  public totalCount: number = 0;
+
+  public page = new BehaviorSubject<number>(
+      +(localStorage.getItem('page') || 1)
+  )
+  public itemsPerPage = new BehaviorSubject<number>(5);
+
+  public products: Observable<ProductListItem[]>
+    = combineLatest([
+      this.page,
+      this.itemsPerPage,
+    ]).pipe(
+      switchMap<[number, number], Observable<ProductListItem[]>>(([page, itemsPerPage]) => 
+        this.httpService.getProducts()
+          .pipe(
+            map<ProductListItem[], ProductListItem[]>(
+                (products: ProductListItem[]) => {
+                    this.totalCount = products.length;
+                    
+                    const startIndex = itemsPerPage * (page - 1)
+
+                    return products.slice(
+                        startIndex,
+                        startIndex + itemsPerPage
+                    );
+                }
+            )
+          )
+      )
+    )
+
   /**
    * Конструктор класса ProductsComponent.
    */
   constructor(private httpService: HttpService){
-    this.page = 1;
-    this.getProducts();
   }
-  ngOnInit(): void {
+
+  public ngOnInit(): void {
   }
-  onPageChanged(): void {
-    localStorage.setItem('page', String(this.page));
-    this.getProducts();
+
+  public onPageChanged(page: number): void {
+    localStorage.setItem('page', page.toString());
+
+    this.page.next(page);
   }
-  /**
-   * Получение списка продуктов.
-   */
-  getProducts(): void {
-    if (localStorage.getItem('itemsPerPage')) {
-      this.itemsPerPage = Number(localStorage.getItem('itemsPerPage'));
-    }
-    this.httpService.getProducts(this.page, this.itemsPerPage)
-      .subscribe(p => {
-        this.products = p.rows;
-        this.collectionSize = p.totalCount;
-      });
-  }
-  /**
-   * Изменение размера страницы.
-   */
-  changeSize(selectedItem: number): void {
-    this.itemsPerPage = selectedItem;
-    localStorage.setItem('itemsPerPage', String(this.itemsPerPage));
-    localStorage.setItem('page', String(1));
-    window.location.reload();
+
+  public changeSize(target: any): void {
+    this.itemsPerPage.next(target.value);
   }
 }
